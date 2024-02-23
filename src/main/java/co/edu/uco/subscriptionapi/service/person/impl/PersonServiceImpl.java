@@ -26,12 +26,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person save(Person person) {
-        return new Person();
+        return person;
     }
 
     @Override
     public Person updatePerson(Person person) {
-        return new Person();
+        return person;
     }
 
     @Override
