@@ -25,7 +25,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person save(Person person) {
+    public Person savePerson(Person person) {
         return person;
     }
 
