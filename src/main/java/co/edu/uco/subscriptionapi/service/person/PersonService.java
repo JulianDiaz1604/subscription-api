@@ -9,7 +9,7 @@ public interface PersonService {
     Person getPersonById(UUID id);
     Person getPersonByName(String name);
     Person getPersonByEmail(String email);
-    Person save(Person person);
+    Person savePerson(Person person);
     Person updatePerson(Person person);
     void deletePerson(UUID id);
 

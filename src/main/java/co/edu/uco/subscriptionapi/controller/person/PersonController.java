@@ -19,19 +19,19 @@ public class PersonController {
         return personService.getPersonById(id);
     }
 
-    @GetMapping("/person/{name}")
+    @GetMapping("/person/name/{name}")
     public Person getPersonByName(@PathVariable("name") String name) {
         return personService.getPersonByName(name);
     }
 
-    @GetMapping("/person/{email}")
+    @GetMapping("/person/email/{email}")
     public Person getPersonByEmail(@PathVariable String email) {
         return personService.getPersonByEmail(email);
     }
 
     @PostMapping("/person")
     public Person savePerson(@RequestBody Person person) {
-        return personService.save(person);
+        return personService.savePerson(person);
     }
 
     @PutMapping("/person")
