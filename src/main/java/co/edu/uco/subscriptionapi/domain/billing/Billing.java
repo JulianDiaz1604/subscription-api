@@ -1,13 +1,15 @@
 package co.edu.uco.subscriptionapi.domain.billing;
 
-import java.util.Date;
+import co.edu.uco.subscriptionapi.domain.user.User;
+
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Billing {
     private UUID id;
     private int amount;
-    private Date emissionDate;
-    private Date dueDate;
+    private LocalDateTime emissionDate;
+    private LocalDateTime dueDate;
     private UUID subcription_id;
 
 
@@ -27,19 +29,19 @@ public class Billing {
         this.amount = amount;
     }
 
-    public Date getEmissionDate() {
+    public LocalDateTime getEmissionDate() {
         return emissionDate;
     }
 
-    public void setEmissionDate(Date emissionDate) {
+    public void setEmissionDate(LocalDateTime emissionDate) {
         this.emissionDate = emissionDate;
     }
 
-    public Date getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 

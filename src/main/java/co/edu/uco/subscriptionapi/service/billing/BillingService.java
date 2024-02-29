@@ -8,6 +8,13 @@ public interface BillingService {
 
     Billing getBillingById(UUID id);
 
-    Billing saveBilling( Billing billing);
+    Billing getBySubscriptionId(UUID id);
+
+    Billing saveBilling(Billing billing);
+
+    void deletBilling(UUID id);
+
+    Billing updateBilling(Billing  billing);
+
 }
 

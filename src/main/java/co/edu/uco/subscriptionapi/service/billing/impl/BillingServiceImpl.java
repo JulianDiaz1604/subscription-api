@@ -14,7 +14,22 @@ public class BillingServiceImpl implements BillingService {
     }
 
     @Override
+    public Billing getBySubscriptionId(UUID id) {
+        return new Billing();
+    }
+
+    @Override
     public Billing saveBilling(Billing billing) {
+        return billing;
+    }
+
+    @Override
+    public void deletBilling(UUID id) {
+
+    }
+
+    @Override
+    public Billing updateBilling(Billing billing) {
         return billing;
     }
 }
