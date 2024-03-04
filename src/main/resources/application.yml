@@ -1,0 +1,12 @@
+
+server:
+  port: 8080
+
+## Data source
+spring:
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://${DB_URL}/subscription
+    username: ${DB_USERNAME}

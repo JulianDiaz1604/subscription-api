@@ -1,16 +1,14 @@
 package co.edu.uco.subscriptionapi.domain.billing;
 
-import co.edu.uco.subscriptionapi.domain.user.User;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Billing {
     private UUID id;
-    private int amount;
+    private double amount;
     private LocalDateTime emissionDate;
     private LocalDateTime dueDate;
-    private UUID subcription_id;
+    private UUID subscriptionId;
 
 
     public UUID getId() {
@@ -21,11 +19,11 @@ public class Billing {
         this.id = id;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -45,12 +43,12 @@ public class Billing {
         this.dueDate = dueDate;
     }
 
-    public UUID getSubcription_id() {
-        return subcription_id;
+    public UUID getSubscriptionId() {
+        return subscriptionId;
     }
 
-    public void setSubcription_id(UUID subcription_id) {
-        this.subcription_id = subcription_id;
+    public void setSubscriptionId(UUID subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
 
     @Override
@@ -60,7 +58,7 @@ public class Billing {
                 ", amount=" + amount +
                 ", emissionDate=" + emissionDate +
                 ", dueDate=" + dueDate +
-                ", subcription_id=" + subcription_id +
+                ", subscriptionId=" + subscriptionId +
                 '}';
     }
 }

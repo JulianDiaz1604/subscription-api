@@ -24,7 +24,7 @@ public class BillingServiceImpl implements BillingService {
     }
 
     @Override
-    public void deletBilling(UUID id) {
+    public void deleteBilling(UUID id) {
 
     }
 

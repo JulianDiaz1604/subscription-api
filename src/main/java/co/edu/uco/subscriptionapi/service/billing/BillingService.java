@@ -12,7 +12,7 @@ public interface BillingService {
 
     Billing saveBilling(Billing billing);
 
-    void deletBilling(UUID id);
+    void deleteBilling(UUID id);
 
     Billing updateBilling(Billing  billing);
 
