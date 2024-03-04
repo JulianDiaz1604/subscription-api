@@ -18,12 +18,12 @@ public class BillingController {
     }
 
     @GetMapping("/billing/subscription/{subs}")
-    public Billing getBillingBySubscriptionId(@PathVariable UUID id){
-        return billingService.getBySubscriptionId(id);
+    public Billing getBillingBySubscriptionId(@PathVariable UUID subs){
+        return billingService.getBySubscriptionId(subs);
     }
 
     @DeleteMapping("/billing")
-    public void deletBilling(@RequestParam UUID id){
+    public void deleteBilling(@RequestParam UUID id){
         billingService.deleteBilling(id);
     }
 
