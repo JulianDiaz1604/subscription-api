@@ -1,53 +1,38 @@
 package co.edu.uco.subscriptionapi.repository.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.*;
+
 import java.util.UUID;
 
+@Setter
+@Data
+@Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Table(name = "user")
 public class UserEntity {
+
+    @Id
+    @Column(name = "id")
     private UUID id;
+
+    @Column(name = "user_name")
     private String username;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "token")
     private String token;
-    private UUID person_id;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public UUID getPerson_id() {
-        return person_id;
-    }
-
-    public void setPerson_id(UUID person_id) {
-        this.person_id = person_id;
-    }
+    @Column(name = "person_id")
+    private UUID personId;
 
     @Override
     public String toString() {
@@ -56,7 +41,8 @@ public class UserEntity {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", token='" + token + '\'' +
-                ", person_id=" + person_id +
+                ", personId=" + personId +
                 '}';
     }
+
 }
