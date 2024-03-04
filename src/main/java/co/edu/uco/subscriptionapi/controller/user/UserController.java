@@ -22,5 +22,5 @@ public class UserController {
 @PutMapping("/person")
     public User updateUser(@RequestBody User user){ return userService.updateUser(user);}
 @DeleteMapping("/person")
-    public void deletUser(@RequestParam UUID id){ userService.deletUser(id); }
+    public void deletUser(@RequestParam UUID id){ userService.deleteUser(id); }
 }

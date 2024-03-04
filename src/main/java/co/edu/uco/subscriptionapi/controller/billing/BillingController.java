@@ -24,7 +24,7 @@ public class BillingController {
 
     @DeleteMapping("/billing")
     public void deletBilling(@RequestParam UUID id){
-        billingService.deletBilling(id);
+        billingService.deleteBilling(id);
     }
 
     @PutMapping("/billing")

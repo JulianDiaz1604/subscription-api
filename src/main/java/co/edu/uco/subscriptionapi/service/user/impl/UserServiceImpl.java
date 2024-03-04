@@ -30,6 +30,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deletUser(UUID id) {
+    public void deleteUser(UUID id) {
     }
 }
