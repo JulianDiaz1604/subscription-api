@@ -8,14 +8,12 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Setter
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Table(name = "user")
+@Table(name = "user", schema = "test")
 public class UserEntity {
 
     @Id
@@ -33,6 +31,46 @@ public class UserEntity {
 
     @Column(name = "person_id")
     private UUID personId;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public UUID getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(UUID personId) {
+        this.personId = personId;
+    }
 
     @Override
     public String toString() {
