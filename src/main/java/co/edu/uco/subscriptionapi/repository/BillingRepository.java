@@ -11,6 +11,8 @@ import java.util.UUID;
 @Repository
 public interface BillingRepository extends JpaRepository<BillingEntity, UUID> {
 
+    BillingEntity save(@Param("billing") BillingEntity billing);
+
     @Query("SELECT c FROM BillingEntity c WHERE c.subscriptionId = :subscriptionId")
     BillingEntity getBillingBySubscriptionId(@Param("subscriptionId") UUID subscriptionId);
 
