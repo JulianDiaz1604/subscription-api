@@ -15,7 +15,7 @@ public class BillingServiceImpl implements BillingService {
 
     @Autowired
     private BillingRepository billingRepository;
-    private BillingMapper mapper;
+    private BillingMapper mapper = new BillingMapper();
 
     @Override
     public Billing getBillingById(UUID id) {

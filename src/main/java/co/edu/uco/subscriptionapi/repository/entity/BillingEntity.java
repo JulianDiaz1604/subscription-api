@@ -9,14 +9,12 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Setter
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Table(name = "billing")
+@Table(name = "billing", schema = "test")
 public class BillingEntity {
 
     @Id
@@ -34,6 +32,46 @@ public class BillingEntity {
 
     @Column(name = "subscription_id")
     private UUID subscriptionId;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getEmissionDate() {
+        return emissionDate;
+    }
+
+    public void setEmissionDate(LocalDateTime emissionDate) {
+        this.emissionDate = emissionDate;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public UUID getSubscriptionId() {
+        return subscriptionId;
+    }
+
+    public void setSubscriptionId(UUID subscriptionId) {
+        this.subscriptionId = subscriptionId;
+    }
 
     @Override
     public String toString() {
