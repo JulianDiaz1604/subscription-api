@@ -21,17 +21,17 @@ public class SubscriptionController {
     }
 
     @PostMapping("/subscription")
-    public Subscription saveSubscription(Subscription subscription) {
+    public Subscription saveSubscription(@RequestBody Subscription subscription) {
         return subscriptionService.saveSubscription(subscription);
     }
 
     @PutMapping("/subscription")
-    public Subscription updateSubscription(Subscription subscription) {
+    public Subscription updateSubscription(@RequestBody Subscription subscription) {
         return subscriptionService.updateSubscription(subscription);
     }
 
     @DeleteMapping("/subscription")
-    public void deleteSubscription(UUID id) {
+    public void deleteSubscription(@RequestParam UUID id) {
         subscriptionService.deleteSubscription(id);
     }
 
