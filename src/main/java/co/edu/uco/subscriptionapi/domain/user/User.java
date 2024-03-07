@@ -56,7 +56,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", token='" + token + '\'' +
-                ", personId=" + personId +
+                ", person_id=" + personId +
                 '}';
     }
 }
