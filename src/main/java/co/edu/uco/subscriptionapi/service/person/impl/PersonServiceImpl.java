@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class PersonServiceImpl implements PersonService {
+public class    PersonServiceImpl implements PersonService {
 
     @Autowired
     PersonRepository personRepository;

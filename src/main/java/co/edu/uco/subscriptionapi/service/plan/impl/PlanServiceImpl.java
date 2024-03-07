@@ -17,7 +17,7 @@ public class PlanServiceImpl implements PlanService {
     @Autowired
     PlanRepository planRepository;
 
-    private PlanMapper mapper;
+    private PlanMapper mapper = new PlanMapper();
 
     @Override
     public Plan getPlanById(UUID id) {
