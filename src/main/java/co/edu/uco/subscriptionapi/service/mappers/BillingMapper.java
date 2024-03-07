@@ -20,11 +20,11 @@ public class BillingMapper {
     public BillingEntity toEntity(Billing billingDTO) {
 
         BillingEntity billingEntity = new BillingEntity();
-        billingEntity.setId(billingEntity.getId());
-        billingEntity.setAmount(billingEntity.getAmount());
-        billingEntity.setEmissionDate(billingEntity.getEmissionDate());
-        billingEntity.setDueDate(billingEntity.getDueDate());
-        billingEntity.setSubscriptionId(billingEntity.getSubscriptionId());
+        billingEntity.setId(billingDTO.getId());
+        billingEntity.setAmount(billingDTO.getAmount());
+        billingEntity.setEmissionDate(billingDTO.getEmissionDate());
+        billingEntity.setDueDate(billingDTO.getDueDate());
+        billingEntity.setSubscriptionId(billingDTO.getSubscriptionId());
         return billingEntity;
 
     }

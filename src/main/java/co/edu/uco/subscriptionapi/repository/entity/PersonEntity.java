@@ -8,14 +8,12 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Setter
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Table(name = "person")
+@Table(name = "person", schema = "test")
 public class PersonEntity {
 
     @Id
@@ -39,6 +37,62 @@ public class PersonEntity {
 
     @Column(name = "email")
     private String email;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+    public String getIdentityDocument() {
+        return identityDocument;
+    }
+
+    public void setIdentityDocument(String identityDocument) {
+        this.identityDocument = identityDocument;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public String toString() {

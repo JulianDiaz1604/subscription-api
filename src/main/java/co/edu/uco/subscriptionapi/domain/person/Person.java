@@ -7,9 +7,9 @@ public class Person {
     private UUID id;
     private String name;
     private String lastName;
-    private long mobileNumber;
+    private String mobileNumber;
     private String documentType;
-    private long identityDocument;
+    private String identityDocument;
     private String email;
 
     public UUID getId() {
@@ -36,11 +36,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public float getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(long mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
@@ -52,11 +52,11 @@ public class Person {
         this.documentType = documentType;
     }
 
-    public float getIdentityDocument() {
+    public String getIdentityDocument() {
         return identityDocument;
     }
 
-    public void setIdentityDocument(long identityDocument) {
+    public void setIdentityDocument(String identityDocument) {
         this.identityDocument = identityDocument;
     }
 
