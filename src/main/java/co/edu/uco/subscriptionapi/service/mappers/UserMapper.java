@@ -1,8 +1,6 @@
 package co.edu.uco.subscriptionapi.service.mappers;
 
-import co.edu.uco.subscriptionapi.domain.billing.Billing;
 import co.edu.uco.subscriptionapi.domain.user.User;
-import co.edu.uco.subscriptionapi.repository.entity.BillingEntity;
 import co.edu.uco.subscriptionapi.repository.entity.UserEntity;
 
 public class UserMapper {
@@ -13,7 +11,7 @@ public class UserMapper {
         userDTO.setPassword(userEntity.getPassword());
         userDTO.setUsername(userEntity.getUsername());
         userDTO.setToken(userEntity.getToken());
-        userDTO.setPerson_id(userEntity.getPersonId());
+        userDTO.setPersonId(userEntity.getPersonId());
         return userDTO;
 
     }
@@ -25,7 +23,7 @@ public class UserMapper {
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setUsername(userDTO.getUsername());
         userEntity.setToken(userDTO.getToken());
-        userEntity.setPersonId(userDTO.getPerson_id());
+        userEntity.setPersonId(userDTO.getPersonId());
         return userEntity;
     }
 }

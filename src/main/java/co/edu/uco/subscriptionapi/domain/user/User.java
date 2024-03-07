@@ -7,7 +7,7 @@ public class User {
     private String username;
     private String password;
     private String token;
-    private UUID person_id;
+    private UUID personId;
 
     public UUID getId() {
         return id;
@@ -41,12 +41,12 @@ public class User {
         this.token = token;
     }
 
-    public UUID getPerson_id() {
-        return person_id;
+    public UUID getPersonId() {
+        return personId;
     }
 
-    public void setPerson_id(UUID person_id) {
-        this.person_id = person_id;
+    public void setPersonId(UUID personId) {
+        this.personId = personId;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", token='" + token + '\'' +
-                ", person_id=" + person_id +
+                ", person_id=" + personId +
                 '}';
     }
 }
