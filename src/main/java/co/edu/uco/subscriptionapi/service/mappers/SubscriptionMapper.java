@@ -3,6 +3,8 @@ package co.edu.uco.subscriptionapi.service.mappers;
 import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
 import co.edu.uco.subscriptionapi.repository.entity.SubscriptionEntity;
 
+import java.util.ArrayList;
+
 public class SubscriptionMapper {
 
     public Subscription toDTO(SubscriptionEntity subscriptionEntity) {
@@ -17,6 +19,18 @@ public class SubscriptionMapper {
         return subscriptionDTO;
 
     }
+    public ArrayList<Subscription> toDTOList(ArrayList<SubscriptionEntity> subscriptionEntityList) {
+
+        ArrayList<Subscription> subscriptionDTOList = new ArrayList<Subscription>();
+        subscriptionEntityList.forEach(subscriptionEntity -> {
+            Subscription subscriptionDTO = toDTO(subscriptionEntity);
+            subscriptionDTOList.add(subscriptionDTO);
+        });
+
+        return subscriptionDTOList;
+
+    }
+
 
     public SubscriptionEntity toEntity(Subscription SubscriptionDTO) {
 
