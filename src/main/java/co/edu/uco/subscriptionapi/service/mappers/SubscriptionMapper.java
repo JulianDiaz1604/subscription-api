@@ -3,7 +3,7 @@ package co.edu.uco.subscriptionapi.service.mappers;
 import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
 import co.edu.uco.subscriptionapi.repository.entity.SubscriptionEntity;
 
-public class subscriptionMapper {
+public class SubscriptionMapper {
 
     public Subscription toDTO(SubscriptionEntity subscriptionEntity) {
 
