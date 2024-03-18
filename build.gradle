@@ -16,14 +16,22 @@ repositories {
 }
 
 dependencies {
+
+	//Spring
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compileOnly 'org.projectlombok:lombok'
 
 	//DB
-	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-	implementation('org.postgresql:postgresql')
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.postgresql:postgresql'
+
+	//JWT
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
+	implementation 'com.sun.xml.bind:jaxb-impl:2.2.3-1'
 
 }
 
