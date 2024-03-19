@@ -1,35 +1,12 @@
-package co.edu.uco.subscriptionapi.repository.entity;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
+package co.edu.uco.subscriptionapi.domain.user;
 
 import java.util.UUID;
 
-@Data
-@Entity
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "user", schema = "test")
-public class UserEntity {
-
-    @Id
-    @Column(name = "id")
+public class MyUser {
     private UUID id;
-
-    @Column(name = "username")
     private String username;
-
-    @Column(name = "password")
     private String password;
-
-    @Column(name = "token")
     private String token;
-
-    @Column(name = "person_id")
     private UUID personId;
 
     public UUID getId() {
@@ -74,13 +51,12 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "MyUser{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", token='" + token + '\'' +
-                ", personId=" + personId +
+                ", person_id=" + personId +
                 '}';
     }
-
 }
