@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -50,6 +51,7 @@ public class JwtAuthenticationController {
 
     @PostMapping("/register")
     public MyUser saveUser(@RequestBody MyUser user)  {
+        user.setId(UUID.randomUUID());
         return userDetailsService.save(user);
     }
 

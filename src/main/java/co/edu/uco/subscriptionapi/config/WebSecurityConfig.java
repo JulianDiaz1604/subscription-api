@@ -12,20 +12,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.Collections;
 
-import static org.springframework.security.config.Customizer.withDefaults;
+//import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
-//public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-public class WebSecurityConfig {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+//public class WebSecurityConfig {
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -49,53 +49,53 @@ public class WebSecurityConfig {
             .passwordEncoder(bcryptEncoder);
     }
 
+//    @Bean
+//    public DaoAuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+//        authProvider.setUserDetailsService(jwtUserDetailsService);
+//        authProvider.setPasswordEncoder(bcryptEncoder);
+//        return authProvider;
+//    }
+
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(jwtUserDetailsService);
-        authProvider.setPasswordEncoder(bcryptEncoder);
-        return authProvider;
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 //    @Bean
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
+//    public AuthenticationManager authenticationManager() throws Exception {
+//        return new ProviderManager(Collections.singletonList(authenticationProvider()));
 //    }
 
-    @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
-        return new ProviderManager(Collections.singletonList(authenticationProvider()));
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        // We don't need CSRF for this example
+        httpSecurity.csrf().disable()
+                // dont authenticate this particular request
+                .authorizeRequests().antMatchers("/authenticate","/register").permitAll().
+                // all other requests need to be authenticated
+                        anyRequest().authenticated().and().
+                // make sure we use stateless session; session won't be used to
+                // store user's state.
+                        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        // Add a filter to validate the tokens with every request
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-//    @Override
-//    protected void configure(HttpSecurity httpSecurity) throws Exception {
-//        // We don't need CSRF for this example
-//        httpSecurity.csrf().disable()
-//                // dont authenticate this particular request
-//                .authorizeRequests().antMatchers("/authenticate","/register").permitAll().
-//                // all other requests need to be authenticated
-//                        anyRequest().authenticated().and().
-//                // make sure we use stateless session; session won't be used to
-//                // store user's state.
-//                        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//            .authorizeHttpRequests(auth -> auth
+//                    .requestMatchers("/authenticate").permitAll()
+//                    .requestMatchers("/register").permitAll()
+//                    .anyRequest().authenticated()
+//            )
+//            .httpBasic(withDefaults());
 //
-//        // Add a filter to validate the tokens with every request
-//        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//        return http.build();
 //    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/authenticate").permitAll()
-                    .requestMatchers("/register").permitAll()
-                    .anyRequest().authenticated()
-            )
-            .httpBasic(withDefaults());
-
-        return http.build();
-    }
 
 }
