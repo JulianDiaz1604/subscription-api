@@ -1,8 +1,8 @@
-
+## Server Config
 server:
   port: 8080
 
-## Data source
+## DB Connection
 spring:
 
   datasource:
@@ -10,3 +10,10 @@ spring:
     password: ${DB_PASSWORD}
     url: jdbc:postgresql://${DB_URL}/subscription
     username: ${DB_USERNAME}
+
+## JWT Config
+jwt:
+  secret: javainuse
+  get:
+    token:
+      uri: /authenticate

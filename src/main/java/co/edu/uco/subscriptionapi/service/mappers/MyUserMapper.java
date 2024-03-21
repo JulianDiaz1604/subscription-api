@@ -1,12 +1,12 @@
 package co.edu.uco.subscriptionapi.service.mappers;
 
-import co.edu.uco.subscriptionapi.domain.user.User;
-import co.edu.uco.subscriptionapi.repository.entity.UserEntity;
+import co.edu.uco.subscriptionapi.domain.user.MyUser;
+import co.edu.uco.subscriptionapi.repository.entity.MyUserEntity;
 
-public class UserMapper {
-    public User toDTO(UserEntity userEntity) {
+public class MyUserMapper {
+    public MyUser toDTO(MyUserEntity userEntity) {
 
-        User userDTO = new User();
+        MyUser userDTO = new MyUser();
         userDTO.setId(userEntity.getId());
         userDTO.setPassword(userEntity.getPassword());
         userDTO.setUsername(userEntity.getUsername());
@@ -16,9 +16,9 @@ public class UserMapper {
 
     }
 
-    public UserEntity toEntity(User userDTO) {
+    public MyUserEntity toEntity(MyUser userDTO) {
 
-        UserEntity userEntity = new UserEntity();
+        MyUserEntity userEntity = new MyUserEntity();
         userEntity.setId(userDTO.getId());
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setUsername(userDTO.getUsername());
