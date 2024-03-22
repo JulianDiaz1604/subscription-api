@@ -30,9 +30,6 @@ public class MyUserEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "token")
-    private String token;
-
     @Column(name = "person_id")
     private UUID personId;
 
@@ -60,14 +57,6 @@ public class MyUserEntity {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public UUID getPersonId() {
         return personId;
     }
@@ -82,7 +71,6 @@ public class MyUserEntity {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", token='" + token + '\'' +
                 ", personId=" + personId +
                 '}';
     }
