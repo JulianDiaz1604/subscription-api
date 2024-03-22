@@ -2,9 +2,14 @@ package co.edu.uco.subscriptionapi.controller.jwt;
 
 import co.edu.uco.subscriptionapi.domain.jwt.JwtRequest;
 import co.edu.uco.subscriptionapi.domain.jwt.JwtResponse;
+import co.edu.uco.subscriptionapi.domain.person.Person;
+import co.edu.uco.subscriptionapi.domain.registration.UserRegistrationRequest;
 import co.edu.uco.subscriptionapi.domain.user.MyUser;
 import co.edu.uco.subscriptionapi.jwt.JwtTokenUtil;
+import co.edu.uco.subscriptionapi.repository.PersonRepository;
 import co.edu.uco.subscriptionapi.service.jwt.JwtUserDetailsService;
+import co.edu.uco.subscriptionapi.service.mappers.PersonMapper;
+import co.edu.uco.subscriptionapi.service.person.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +39,9 @@ public class JwtAuthenticationController {
     @Autowired
     private UserDetailsService jwtInMemoryUserDetailsService;
 
+    @Autowired
+    private PersonService personService;
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
             throws Exception {
@@ -50,9 +58,20 @@ public class JwtAuthenticationController {
     }
 
     @PostMapping("/register")
-    public MyUser saveUser(@RequestBody MyUser user)  {
-        user.setId(UUID.randomUUID());
-        return userDetailsService.save(user);
+    public MyUser saveUser(@RequestBody UserRegistrationRequest userRegistrationRequest) {
+        MyUser user = userRegistrationRequest.getUser();
+        Person person = userRegistrationRequest.getPerson();
+        MyUser savedUser = new MyUser();
+        try {
+            person.setId(UUID.randomUUID());
+            personService.savePerson(person);
+            user.setId(UUID.randomUUID());
+            user.setPersonId(person.getId());
+            savedUser = userDetailsService.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return savedUser;
     }
 
     private void authenticate(String username, String password) throws Exception {
