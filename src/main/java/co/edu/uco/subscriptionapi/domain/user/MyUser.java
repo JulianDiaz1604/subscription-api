@@ -6,7 +6,6 @@ public class MyUser {
     private UUID id;
     private String username;
     private String password;
-    private String token;
     private UUID personId;
 
     public UUID getId() {
@@ -33,14 +32,6 @@ public class MyUser {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public UUID getPersonId() {
         return personId;
     }
@@ -55,7 +46,6 @@ public class MyUser {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", token='" + token + '\'' +
                 ", person_id=" + personId +
                 '}';
     }

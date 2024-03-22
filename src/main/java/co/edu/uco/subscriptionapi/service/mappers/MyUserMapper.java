@@ -10,7 +10,6 @@ public class MyUserMapper {
         userDTO.setId(userEntity.getId());
         userDTO.setPassword(userEntity.getPassword());
         userDTO.setUsername(userEntity.getUsername());
-        userDTO.setToken(userEntity.getToken());
         userDTO.setPersonId(userEntity.getPersonId());
         return userDTO;
 
@@ -22,7 +21,6 @@ public class MyUserMapper {
         userEntity.setId(userDTO.getId());
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setUsername(userDTO.getUsername());
-        userEntity.setToken(userDTO.getToken());
         userEntity.setPersonId(userDTO.getPersonId());
         return userEntity;
     }
