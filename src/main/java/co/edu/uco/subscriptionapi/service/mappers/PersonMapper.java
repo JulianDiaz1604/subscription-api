@@ -11,7 +11,7 @@ public class PersonMapper {
         personDTO.setId(personEntity.getId());
         personDTO.setName(personEntity.getName());
         personDTO.setLastName(personEntity.getLastName());
-        personDTO.setMobileNumber(personEntity.getLastName());
+        personDTO.setMobileNumber(personEntity.getMobileNumber());
         personDTO.setDocumentType(personEntity.getDocumentType());
         personDTO.setIdentityDocument(personEntity.getIdentityDocument());
         personDTO.setEmail(personEntity.getEmail());
@@ -25,7 +25,7 @@ public class PersonMapper {
         personEntity.setId(personDTO.getId());
         personEntity.setName(personDTO.getName());
         personEntity.setLastName(personDTO.getLastName());
-        personEntity.setMobileNumber(personDTO.getLastName());
+        personEntity.setMobileNumber(personDTO.getMobileNumber());
         personEntity.setDocumentType(personDTO.getDocumentType());
         personEntity.setIdentityDocument(personDTO.getIdentityDocument());
         personEntity.setEmail(personDTO.getEmail());
