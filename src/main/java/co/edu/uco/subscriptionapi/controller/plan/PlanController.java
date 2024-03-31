@@ -31,7 +31,7 @@ public class PlanController {
 
     @PutMapping("/plan")
     public Plan updatePlan(@RequestBody Plan plan) {
-        return planService.updatePlan(plan);
+            return planService.updatePlan(plan);
     }
 
     @DeleteMapping("/plan")
