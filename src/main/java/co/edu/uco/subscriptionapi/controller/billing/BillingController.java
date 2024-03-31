@@ -28,8 +28,8 @@ public class BillingController {
     }
 
     @PutMapping("/billing")
-    public Billing updateBilling(Billing billing){
-        return billingService.updateBilling(billing);
+    public Billing updateBilling(@RequestBody Billing billing){
+            return billingService.updateBilling(billing);
     }
 
     @PostMapping("/billing")
