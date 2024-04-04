@@ -38,5 +38,5 @@ public class SubscriptionController {
     }
 
     @PatchMapping("/subscription")
-    public Subscription patchSubscription(@RequestBody Map<String, Object> patchFields, @RequestParam UUID id) { return subscriptionService.patchSubscription(id, patchFields); }
+    public Subscription patchSubscription(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return subscriptionService.patchSubscription(id, patchFields); }
 }
