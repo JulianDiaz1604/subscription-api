@@ -1,7 +1,9 @@
 package co.edu.uco.subscriptionapi.service.user;
 
+import co.edu.uco.subscriptionapi.domain.person.Person;
 import co.edu.uco.subscriptionapi.domain.user.MyUser;
 
+import java.util.Map;
 import java.util.UUID;
 
 public interface MyUserService {
@@ -12,6 +14,8 @@ public interface MyUserService {
     MyUser saveUser(MyUser user);
 
     MyUser updateUser(MyUser user);
+
+    MyUser patchUser(UUID id, Map<?, Object> patchFields);
 
     void deleteUser(UUID id);
 
