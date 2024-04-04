@@ -1,11 +1,13 @@
 package co.edu.uco.subscriptionapi.controller.subscription;
 
+import co.edu.uco.subscriptionapi.domain.billing.Billing;
 import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
 import co.edu.uco.subscriptionapi.service.subscription.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -35,4 +37,6 @@ public class SubscriptionController {
         subscriptionService.deleteSubscription(id);
     }
 
+    @PatchMapping("/subscription")
+    public Subscription patchSubscription(@RequestBody Map<String, Object> patchFields, @RequestParam UUID id) { return subscriptionService.patchSubscription(id, patchFields); }
 }

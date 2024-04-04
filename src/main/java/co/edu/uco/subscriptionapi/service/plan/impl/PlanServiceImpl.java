@@ -9,6 +9,7 @@ import co.edu.uco.subscriptionapi.service.plan.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -40,6 +41,30 @@ public class PlanServiceImpl implements PlanService {
     public Plan updatePlan(Plan plan) {
         PlanEntity planEntity = mapper.toEntity(plan);
         return mapper.toDTO(planRepository.save(planEntity));
+    }
+
+    @Override
+    public Plan patchPlan(UUID id, Map<?, Object> patchFields) {
+        Plan plan = mapper.toDTO(planRepository.findById(id).get());
+        if (patchFields.containsKey("name")){
+            String value = (String) patchFields.get("name");
+            plan.setName(value);
+        }
+        if (patchFields.containsKey("price")){
+            Double value = (Double) patchFields.get("price");
+            plan.setPrice(value);
+        }
+        if (patchFields.containsKey("period")){
+            String value = (String) patchFields.get("period");
+            plan.setPeriod(value);
+        }
+        if (patchFields.containsKey("description")){
+            String value = (String) patchFields.get("description");
+            plan.setDescription(value);
+        }
+        PlanEntity planEntity = mapper.toEntity(plan);
+        return mapper.toDTO(planRepository.save(planEntity));
+
     }
 
     @Override
