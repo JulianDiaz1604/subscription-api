@@ -1,9 +1,12 @@
 package co.edu.uco.subscriptionapi.controller.billing;
 
 import co.edu.uco.subscriptionapi.domain.billing.Billing;
+import co.edu.uco.subscriptionapi.domain.plan.Plan;
 import co.edu.uco.subscriptionapi.service.billing.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -36,4 +39,7 @@ public class BillingController {
     public Billing saveBilling(@RequestBody Billing billing){
         return billingService.saveBilling(billing);
     }
+
+    @PatchMapping("/billing")
+    public Billing patchBilling(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return billingService.patchBilling(id, patchFields); }
 }
