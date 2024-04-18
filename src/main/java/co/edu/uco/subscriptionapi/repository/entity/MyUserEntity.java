@@ -2,10 +2,16 @@ package co.edu.uco.subscriptionapi.repository.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -59,16 +65,6 @@ public class MyUserEntity {
 
     public void setPersonId(UUID personId) {
         this.personId = personId;
-    }
-
-    @Override
-    public String toString() {
-        return "MyUser{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", personId=" + personId +
-                '}';
     }
 
 }
