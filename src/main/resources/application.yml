@@ -13,7 +13,7 @@ spring:
 
 ## JWT Config
 jwt:
-  secret: javainuse
+  secret: ${JWT_SECRET_KEY}
   get:
     token:
       uri: /authenticate

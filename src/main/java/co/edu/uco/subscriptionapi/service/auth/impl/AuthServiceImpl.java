@@ -12,6 +12,10 @@ import co.edu.uco.subscriptionapi.service.person.PersonService;
 import co.edu.uco.subscriptionapi.service.user.MyUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -29,11 +33,17 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private JwtService jwtService;
 
-    private MyUserMapper userMapper = new MyUserMapper();
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public JwtResponse authenticate(JwtRequest request) {
-        return null;
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        UserDetails user = userService.getUserByUsername(request.getUsername());
+        return new JwtResponse(jwtService.getToken(user));
     }
 
     @Override
@@ -46,6 +56,7 @@ public class AuthServiceImpl implements AuthService {
         person.setId(UUID.randomUUID());
         personService.savePerson(person);
         user.setId(UUID.randomUUID());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setPersonId(person.getId());
 
         savedUser = userService.saveUser(user);
