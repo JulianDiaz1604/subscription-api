@@ -2,14 +2,24 @@
 server:
   port: 8080
 
-## DB Connection
+##Spring Config
 spring:
 
+  ## DB Connection
   datasource:
     driver-class-name: org.postgresql.Driver
     password: ${DB_PASSWORD}
     url: ${DB_URL}
     username: ${DB_USERNAME}
+
+  ## RabbitMQ Config
+  rabbitmq:
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_USERNAME}
+    password: ${RABBIT_PASSWORD}
+    virtual-host: ${RABBIT_VIRTUAL_HOST}
+    dynamic: false
 
 ## JWT Config
 jwt:
@@ -17,3 +27,12 @@ jwt:
   get:
     token:
       uri: /authenticate
+
+## Queue Config
+subscription:
+  publisher:
+    routing-key: subscription.publisher.key
+    exchange-name: subscription.publisher.exchange
+    queue-name: subscription.publisher.queue
+  consumer:
+    queue-name: subscription.consumer.queue
