@@ -5,6 +5,7 @@ import co.edu.uco.subscriptionapi.service.plan.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -31,7 +32,7 @@ public class PlanController {
 
     @PutMapping("/plan")
     public Plan updatePlan(@RequestBody Plan plan) {
-        return planService.updatePlan(plan);
+            return planService.updatePlan(plan);
     }
 
     @DeleteMapping("/plan")
@@ -39,4 +40,8 @@ public class PlanController {
         planService.deletePlan(id);
     }
 
+    @PatchMapping("/plan")
+    public Plan patchPlan(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return planService.patchPlan(id, patchFields); }
+
 }
+
