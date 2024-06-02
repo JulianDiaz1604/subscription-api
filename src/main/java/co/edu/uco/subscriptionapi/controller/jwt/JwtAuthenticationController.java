@@ -1,5 +1,6 @@
 package co.edu.uco.subscriptionapi.controller.jwt;
 
+import co.edu.uco.subscriptionapi.domain.authenticateResponse.AuthenticateResponse;
 import co.edu.uco.subscriptionapi.domain.jwt.JwtRequest;
 import co.edu.uco.subscriptionapi.domain.jwt.JwtResponse;
 import co.edu.uco.subscriptionapi.domain.person.Person;
@@ -10,6 +11,7 @@ import co.edu.uco.subscriptionapi.repository.PersonRepository;
 import co.edu.uco.subscriptionapi.service.jwt.JwtUserDetailsService;
 import co.edu.uco.subscriptionapi.service.mappers.PersonMapper;
 import co.edu.uco.subscriptionapi.service.person.PersonService;
+import co.edu.uco.subscriptionapi.service.user.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,6 +42,9 @@ public class JwtAuthenticationController {
     private UserDetailsService jwtInMemoryUserDetailsService;
 
     @Autowired
+    private MyUserService myUserService;
+
+    @Autowired
     private PersonService personService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -52,9 +57,10 @@ public class JwtAuthenticationController {
                 userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
 
+        final UUID myUserId = myUserService.getUserByUsername(authenticationRequest.getUsername()).getId();
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new AuthenticateResponse(myUserId, token));
     }
 
     @PostMapping("/register")
