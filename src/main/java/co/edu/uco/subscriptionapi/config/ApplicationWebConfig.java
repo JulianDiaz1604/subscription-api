@@ -17,10 +17,13 @@ public class ApplicationWebConfig {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
+        return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/v1/**").allowedMethods("DELETE", "PUT", "POST", "GET");
+                registry.addMapping("/api/v1/**")
+                        .allowedOrigins("http://localhost:4200") // Especifica el dominio permitido
+                        .allowedMethods("DELETE", "PUT", "POST", "GET") // Métodos HTTP permitidos
+                        .allowCredentials(true);
             }
         };
     }

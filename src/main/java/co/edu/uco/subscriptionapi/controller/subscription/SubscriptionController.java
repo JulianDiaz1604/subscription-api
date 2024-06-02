@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
+@CrossOrigin(origins = "http://localhost:4200")
 
 @RestController
 @RequestMapping("/api/v1/rest")
@@ -17,10 +18,13 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping("/subscription")
     public ArrayList<Subscription> getSubscriptionListByUserId(@RequestParam UUID userId) {
         return subscriptionService.getSubscriptionListByUserId(userId);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
 
     @PostMapping("/subscription")
     public Subscription saveSubscription(@RequestBody Subscription subscription) {
