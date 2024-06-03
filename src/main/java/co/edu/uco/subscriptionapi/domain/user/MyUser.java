@@ -7,6 +7,7 @@ public class MyUser {
     private String username;
     private String password;
     private UUID personId;
+    private boolean isAdmin;
 
     public UUID getId() {
         return id;
@@ -40,13 +41,22 @@ public class MyUser {
         this.personId = personId;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
     @Override
     public String toString() {
         return "MyUser{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", person_id=" + personId +
+                ", personId=" + personId + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 }

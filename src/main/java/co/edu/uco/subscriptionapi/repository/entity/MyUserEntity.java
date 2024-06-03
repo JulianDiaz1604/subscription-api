@@ -2,10 +2,7 @@ package co.edu.uco.subscriptionapi.repository.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Data
@@ -28,6 +25,9 @@ public class MyUserEntity {
 
     @Column(name = "person_id")
     private UUID personId;
+
+    @Column(name = "is_admin")
+    private boolean isAdmin;
 
     public UUID getId() {
         return id;
@@ -61,13 +61,22 @@ public class MyUserEntity {
         this.personId = personId;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
     @Override
     public String toString() {
         return "MyUser{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", personId=" + personId +
+                ", personId=" + personId + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 

@@ -57,10 +57,12 @@ public class JwtAuthenticationController {
                 userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
 
-        final UUID myUserId = myUserService.getUserByUsername(authenticationRequest.getUsername()).getId();
+        final MyUser user = myUserService.getUserByUsername(authenticationRequest.getUsername());
+        final UUID userId = user.getId();
+        final boolean isAdmin = user.isAdmin();
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticateResponse(myUserId, token));
+        return ResponseEntity.ok(new AuthenticateResponse(userId, isAdmin, token));
     }
 
     @PostMapping("/register")

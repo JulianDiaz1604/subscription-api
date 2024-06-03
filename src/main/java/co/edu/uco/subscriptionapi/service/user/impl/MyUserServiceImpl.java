@@ -12,10 +12,11 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
-
 public class MyUserServiceImpl implements MyUserService {
+
     @Autowired
     MyUserRepository userRepository;
+
     MyUserMapper mapper = new MyUserMapper();
 
     @Override
