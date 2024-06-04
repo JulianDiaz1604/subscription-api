@@ -9,6 +9,8 @@ import co.edu.uco.subscriptionapi.service.plan.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -28,6 +30,16 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public Plan getPlanByName(String name) {
         return mapper.toDTO(planRepository.getPlanByName(name));
+    }
+
+    @Override
+    public List<Plan> getAllPlan() {
+        List<PlanEntity> planEntities = planRepository.findAll();
+        List<Plan> planList = new ArrayList<>();
+        for (PlanEntity planEntity : planEntities) {
+            planList.add(mapper.toDTO(planEntity));
+        }
+        return planList;
     }
 
     @Override
@@ -53,10 +65,6 @@ public class PlanServiceImpl implements PlanService {
         if (patchFields.containsKey("price")){
             Double value = (Double) patchFields.get("price");
             plan.setPrice(value);
-        }
-        if (patchFields.containsKey("period")){
-            String value = (String) patchFields.get("period");
-            plan.setPeriod(value);
         }
         if (patchFields.containsKey("description")){
             String value = (String) patchFields.get("description");

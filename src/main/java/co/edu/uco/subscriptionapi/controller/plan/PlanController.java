@@ -5,6 +5,7 @@ import co.edu.uco.subscriptionapi.service.plan.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -23,6 +24,11 @@ public class PlanController {
     @GetMapping("/plan/name/{name}")
     public Plan getPlanByName(@PathVariable("name") String name) {
         return planService.getPlanByName(name);
+    }
+
+    @GetMapping("/plan/list")
+    public List<Plan> getPlanList() {
+        return planService.getAllPlan();
     }
 
     @PostMapping("/plan")

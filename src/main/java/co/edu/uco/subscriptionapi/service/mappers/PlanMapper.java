@@ -11,7 +11,6 @@ public class PlanMapper {
         plan.setId(planEntity.getId());
         plan.setName(planEntity.getName());
         plan.setPrice(planEntity.getPrice());
-        plan.setPeriod(planEntity.getPeriod());
         plan.setDescription(planEntity.getDescription());
         return plan;
 
@@ -23,7 +22,6 @@ public class PlanMapper {
         planEntity.setId(plan.getId());
         planEntity.setName(plan.getName());
         planEntity.setPrice(plan.getPrice());
-        planEntity.setPeriod(plan.getPeriod());
         planEntity.setDescription(plan.getDescription());
         return planEntity;
 

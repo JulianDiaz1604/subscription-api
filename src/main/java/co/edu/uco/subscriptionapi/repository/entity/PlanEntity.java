@@ -26,9 +26,6 @@ public class PlanEntity {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "period")
-    private String period;
-
     @Column(name = "description")
     private String description;
 
@@ -56,14 +53,6 @@ public class PlanEntity {
         this.price = price;
     }
 
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -78,7 +67,6 @@ public class PlanEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", period='" + period + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
