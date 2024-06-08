@@ -43,3 +43,4 @@ rabbitmq:
     plan-response: plan.response
     billing-processing: billing.processing
     billing-response: billing.response
+
