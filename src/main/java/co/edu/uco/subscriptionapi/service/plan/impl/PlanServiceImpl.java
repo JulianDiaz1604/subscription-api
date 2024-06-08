@@ -1,11 +1,17 @@
 package co.edu.uco.subscriptionapi.service.plan.impl;
 
+import co.edu.uco.subscriptionapi.courier.MessageReceiverBroker;
+import co.edu.uco.subscriptionapi.courier.MessageSenderBroker;
+import co.edu.uco.subscriptionapi.domain.period.Period;
 import co.edu.uco.subscriptionapi.domain.plan.Plan;
+import co.edu.uco.subscriptionapi.domain.plan.PlanListMessage;
 import co.edu.uco.subscriptionapi.repository.PlanRepository;
 import co.edu.uco.subscriptionapi.repository.entity.PlanEntity;
 import co.edu.uco.subscriptionapi.service.mappers.PersonMapper;
 import co.edu.uco.subscriptionapi.service.mappers.PlanMapper;
+import co.edu.uco.subscriptionapi.service.period.PeriodService;
 import co.edu.uco.subscriptionapi.service.plan.PlanService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +26,18 @@ public class PlanServiceImpl implements PlanService {
     @Autowired
     PlanRepository planRepository;
 
+    @Autowired
+    PeriodService periodService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    MessageSenderBroker messageSenderBroker;
+
+    @Autowired
+    MessageReceiverBroker messageReceiverBroker;
+
     private PlanMapper mapper = new PlanMapper();
 
     @Override
@@ -33,11 +51,30 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<Plan> getAllPlan() {
+    public List<Plan> getAllPlan(String period) {
+        Double discount = periodService.getPeriodByName(period).getDiscount();
         List<PlanEntity> planEntities = planRepository.findAll();
         List<Plan> planList = new ArrayList<>();
         for (PlanEntity planEntity : planEntities) {
             planList.add(mapper.toDTO(planEntity));
+        }
+        PlanListMessage message = new PlanListMessage(discount, planList);
+        messageSenderBroker.sendPlanMessage(message);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Object response = messageReceiverBroker.getLastReceivedMessage();
+        if (response != null) {
+            try {
+                PlanListMessage receivedMessage = objectMapper.convertValue(response, PlanListMessage.class);
+                return receivedMessage.getPlanList();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return planList;
     }

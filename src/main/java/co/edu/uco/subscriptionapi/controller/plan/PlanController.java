@@ -26,9 +26,9 @@ public class PlanController {
         return planService.getPlanByName(name);
     }
 
-    @GetMapping("/plan/list")
-    public List<Plan> getPlanList() {
-        return planService.getAllPlan();
+    @GetMapping("/plan/list/{period}")
+    public List<Plan> getPlanList(@PathVariable("period") String period) {
+        return planService.getAllPlan(period);
     }
 
     @PostMapping("/plan")

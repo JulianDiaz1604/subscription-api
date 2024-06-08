@@ -29,10 +29,17 @@ jwt:
       uri: /authenticate
 
 ## Queue Config
-subscription:
-  publisher:
-    routing-key: subscription.publisher.key
-    exchange-name: subscription.publisher.exchange
-    queue-name: subscription.publisher.queue
-  consumer:
-    queue-name: subscription.consumer.queue
+rabbitmq:
+  exchange:
+    request: request-exchange
+    response: response-exchange
+  queue:
+    plan-processing: plan-processing-queue
+    plan-response: plan-response-queue
+    billing-processing: billing-processing-queue
+    billing-response: billing-response-queue
+  routing-key:
+    plan-processing: plan.processing
+    plan-response: plan.response
+    billing-processing: billing.processing
+    billing-response: billing.response

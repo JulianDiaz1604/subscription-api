@@ -10,7 +10,7 @@ public interface PlanService {
 
     Plan getPlanById(UUID id);
     Plan getPlanByName(String name);
-    List<Plan> getAllPlan();
+    List<Plan> getAllPlan(String period);
     Plan savePlan(Plan plan);
     Plan updatePlan(Plan plan);
     Plan patchPlan(UUID id, Map<?, Object>patchFields);
