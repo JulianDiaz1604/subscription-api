@@ -27,6 +27,9 @@ public class SubscriptionEntity {
     @Column(name = "plan_id")
     private UUID planId;
 
+    @Column(name = "period_id")
+    private UUID periodId;
+
     @Column(name = "status")
     private String status;
 
@@ -60,6 +63,14 @@ public class SubscriptionEntity {
         this.planId = planId;
     }
 
+    public UUID getPeriodId() {
+        return periodId;
+    }
+
+    public void setPeriodId(UUID periodId) {
+        this.periodId = periodId;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -90,6 +101,7 @@ public class SubscriptionEntity {
                 "id=" + id +
                 ", userId=" + userId +
                 ", planId=" + planId +
+                ", periodId=" + periodId +
                 ", status='" + status + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +

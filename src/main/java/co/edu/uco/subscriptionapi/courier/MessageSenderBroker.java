@@ -1,6 +1,7 @@
 package co.edu.uco.subscriptionapi.courier;
 
 import co.edu.uco.subscriptionapi.config.RabbitMQProperties;
+import co.edu.uco.subscriptionapi.domain.billing.BillingProcess;
 import co.edu.uco.subscriptionapi.domain.plan.PlanListMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +30,7 @@ public class MessageSenderBroker {
         }
     }
 
-    public void sendBillingMessage(String message) {
+    public void sendBillingMessage(BillingProcess message) {
         try {
             String jsonMessage = objectMapper.writeValueAsString(message);
             rabbitTemplate.convertAndSend(rabbitMQProperties.getExchange().getRequest(), rabbitMQProperties.getRoutingKey().getBillingProcessing(), jsonMessage);
