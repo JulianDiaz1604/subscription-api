@@ -13,6 +13,7 @@ public class SubscriptionMapper {
         subscriptionDTO.setId(subscriptionEntity.getId());
         subscriptionDTO.setEndDate(subscriptionEntity.getEndDate());
         subscriptionDTO.setPlanId(subscriptionEntity.getPlanId());
+        subscriptionDTO.setPeriodId(subscriptionEntity.getPeriodId());
         subscriptionDTO.setStatus(subscriptionEntity.getStatus());
         subscriptionDTO.setUserId(subscriptionEntity.getUserId());
         subscriptionDTO.setStartDate(subscriptionEntity.getStartDate());
@@ -37,6 +38,7 @@ public class SubscriptionMapper {
         SubscriptionEntity subscriptionEntity = new SubscriptionEntity();
         subscriptionEntity.setId(SubscriptionDTO.getId());
         subscriptionEntity.setPlanId(SubscriptionDTO.getPlanId());
+        subscriptionEntity.setPeriodId(SubscriptionDTO.getPeriodId());
         subscriptionEntity.setStatus(SubscriptionDTO.getStatus());
         subscriptionEntity.setEndDate(SubscriptionDTO.getEndDate());
         subscriptionEntity.setStartDate(SubscriptionDTO.getStartDate());

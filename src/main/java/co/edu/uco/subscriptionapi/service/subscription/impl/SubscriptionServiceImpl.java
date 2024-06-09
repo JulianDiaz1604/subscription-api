@@ -5,6 +5,7 @@ import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
 import co.edu.uco.subscriptionapi.repository.SubscriptionRepository;
 import co.edu.uco.subscriptionapi.repository.entity.PlanEntity;
 import co.edu.uco.subscriptionapi.repository.entity.SubscriptionEntity;
+import co.edu.uco.subscriptionapi.service.billing.BillingProcessService;
 import co.edu.uco.subscriptionapi.service.mappers.SubscriptionMapper;
 import co.edu.uco.subscriptionapi.service.subscription.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Autowired
     SubscriptionRepository subscriptionRepository;
 
+    @Autowired
+    BillingProcessService billingProcessService;
+
     private SubscriptionMapper mapper = new SubscriptionMapper();
 
     @Override
@@ -33,7 +37,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public Subscription saveSubscription(Subscription subscription) {
         subscription.setId(UUID.randomUUID());
         SubscriptionEntity subscriptionEntity = mapper.toEntity(subscription);
-        return mapper.toDTO(subscriptionRepository.save(subscriptionEntity));
+        subscriptionRepository.save(subscriptionEntity);
+        billingProcessService.execute(subscription);
+        return subscription;
     }
 
     @Override
