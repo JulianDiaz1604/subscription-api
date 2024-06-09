@@ -37,7 +37,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public Subscription saveSubscription(Subscription subscription) {
         subscription = billingProcessService.execute(subscription);
         SubscriptionEntity subscriptionEntity = mapper.toEntity(subscription);
-//        subscriptionRepository.save(subscriptionEntity);
+        subscriptionRepository.save(subscriptionEntity);
         return subscription;
     }
 
