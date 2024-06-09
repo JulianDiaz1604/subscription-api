@@ -20,6 +20,9 @@ public class PeriodEntity {
     @Column(name = "discount")
     private double discount;
 
+    @Column(name = "months")
+    private int months;
+
     public UUID getId() {
         return id;
     }
@@ -44,12 +47,21 @@ public class PeriodEntity {
         this.discount = discount;
     }
 
+    public int getMonths() {
+        return months;
+    }
+
+    public void setMonths(int months) {
+        this.months = months;
+    }
+
     @Override
     public String toString() {
         return "PeriodEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", discount='" + discount + '\'' +
+                ", discount=" + discount +
+                ", months=" + months +
                 '}';
     }
 

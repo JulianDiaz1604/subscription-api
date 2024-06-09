@@ -35,10 +35,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public Subscription saveSubscription(Subscription subscription) {
-        subscription.setId(UUID.randomUUID());
+        subscription = billingProcessService.execute(subscription);
         SubscriptionEntity subscriptionEntity = mapper.toEntity(subscription);
-        subscriptionRepository.save(subscriptionEntity);
-        billingProcessService.execute(subscription);
+//        subscriptionRepository.save(subscriptionEntity);
         return subscription;
     }
 

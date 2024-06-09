@@ -15,7 +15,7 @@ public interface PeriodRepository extends JpaRepository<PeriodEntity, UUID> {
     @Query("SELECT c FROM PeriodEntity c WHERE c.name = :periodName")
     PeriodEntity getPeriodByName(@Param("periodName") String periodName);
 
-    @Query("SELECT c.name FROM PeriodEntity c")
+    @Query("SELECT c.name FROM PeriodEntity c ORDER BY c.months ASC")
     List<String> getAllPeriodNames();
 
 }
