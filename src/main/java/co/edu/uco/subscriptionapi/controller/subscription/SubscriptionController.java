@@ -2,6 +2,7 @@ package co.edu.uco.subscriptionapi.controller.subscription;
 
 import co.edu.uco.subscriptionapi.domain.billing.Billing;
 import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
+import co.edu.uco.subscriptionapi.domain.subscription.SubscriptionDetails;
 import co.edu.uco.subscriptionapi.service.subscription.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,12 @@ public class SubscriptionController {
     @CrossOrigin(origins = "http://localhost:4200")
 
     @GetMapping("/subscription")
-    public ArrayList<Subscription> getSubscriptionListByUserId(@RequestParam UUID userId) {
+    public ArrayList<SubscriptionDetails> getSubscriptionDetailsList() {
+        return subscriptionService.getSubscriptionDetailsList();
+    }
+
+    @GetMapping("/subscription/{id}")
+    public ArrayList<Subscription> getSubscriptionListByUserId(@PathVariable UUID userId) {
         return subscriptionService.getSubscriptionListByUserId(userId);
     }
     @CrossOrigin(origins = "http://localhost:4200")
@@ -43,4 +49,5 @@ public class SubscriptionController {
 
     @PatchMapping("/subscription")
     public Subscription patchSubscription(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return subscriptionService.patchSubscription(id, patchFields); }
+
 }

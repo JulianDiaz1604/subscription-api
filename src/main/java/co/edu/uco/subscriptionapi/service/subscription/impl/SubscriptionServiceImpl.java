@@ -1,9 +1,8 @@
 package co.edu.uco.subscriptionapi.service.subscription.impl;
 
-import co.edu.uco.subscriptionapi.domain.plan.Plan;
 import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
+import co.edu.uco.subscriptionapi.domain.subscription.SubscriptionDetails;
 import co.edu.uco.subscriptionapi.repository.SubscriptionRepository;
-import co.edu.uco.subscriptionapi.repository.entity.PlanEntity;
 import co.edu.uco.subscriptionapi.repository.entity.SubscriptionEntity;
 import co.edu.uco.subscriptionapi.service.billing.BillingProcessService;
 import co.edu.uco.subscriptionapi.service.mappers.SubscriptionMapper;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
@@ -31,6 +29,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public ArrayList<Subscription> getSubscriptionListByUserId(UUID id) {
         return mapper.toDTOList(subscriptionRepository.getSubscriptionListByUserId(id));
+    }
+
+    @Override
+    public ArrayList<SubscriptionDetails> getSubscriptionDetailsList() {
+        return subscriptionRepository.getSubscriptionDetails();
     }
 
     @Override
