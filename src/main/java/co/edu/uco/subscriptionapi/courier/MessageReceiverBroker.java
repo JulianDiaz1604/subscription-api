@@ -1,6 +1,8 @@
 package co.edu.uco.subscriptionapi.courier;
 
+import co.edu.uco.subscriptionapi.domain.billing.Billing;
 import co.edu.uco.subscriptionapi.domain.user.MyUser;
+import co.edu.uco.subscriptionapi.service.billing.BillingService;
 import co.edu.uco.subscriptionapi.service.user.MyUserService;
 import co.edu.uco.subscriptionapi.util.courier.MessageUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +17,9 @@ public class MessageReceiverBroker {
 
     @Autowired
     private MyUserService myUserService;
+
+    @Autowired
+    private BillingService billingService;
 
     private final MessageUtils messageUtils;
 
@@ -39,7 +44,8 @@ public class MessageReceiverBroker {
     @RabbitListener(queues = "${rabbitmq.queue.billing-response}")
     public void receiveBillingMessage(String message) {
         try {
-            lastReceivedMessage = objectMapper.readValue(message, Object.class);
+            Billing billing = objectMapper.readValue(message, Billing.class);
+            billingService.saveBilling(billing);
         } catch (Exception e) {
             e.printStackTrace();
         }
