@@ -26,8 +26,8 @@ public class PeriodController {
     }
 
     @GetMapping("/period/list")
-    public List<String> getAllPeriodNames() {
-        return periodService.getAllPeriodNames();
+    public List<Period> getAllPeriods() {
+        return periodService.getAllPeriods();
     }
 
     @PostMapping("/period")

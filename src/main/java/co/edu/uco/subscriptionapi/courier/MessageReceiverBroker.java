@@ -27,20 +27,9 @@ public class MessageReceiverBroker {
         this.messageUtils = messageUtils;
     }
 
-//    @RabbitListener(queues = "${subscription.consumer.queue-name}")
-//    public void receiveMessageProcessClient(String message) {
-//        try {
-//            System.out.println(messageUtils.getObjectFromMessage(message, MyUser.class).get());
-////            myUserService.saveUser(getObjectFromMessage(message).get());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     @RabbitListener(queues = "${rabbitmq.queue.plan-response}")
     public void receivePlanMessage(String message) {
         try {
-            System.out.println("Received plan message: " + message);
             lastReceivedMessage = objectMapper.readValue(message, Object.class);
         } catch (Exception e) {
             e.printStackTrace();
