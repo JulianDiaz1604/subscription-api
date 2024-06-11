@@ -2,6 +2,7 @@ package co.edu.uco.subscriptionapi.domain.billing;
 
 import co.edu.uco.subscriptionapi.domain.period.Period;
 import co.edu.uco.subscriptionapi.domain.person.Person;
+import co.edu.uco.subscriptionapi.domain.plan.Plan;
 import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
 
 public class BillingProcess {
@@ -9,11 +10,19 @@ public class BillingProcess {
     private Subscription subscription;
     private Person person;
     private Period period;
+    private Plan plan;
+    private Double amount;
 
-    public BillingProcess(Subscription subscription, Person person, Period period) {
+    public BillingProcess() {
+
+    }
+
+    public BillingProcess(Subscription subscription, Person person, Period period, Plan plan, Double amount) {
         this.subscription = subscription;
         this.person = person;
         this.period = period;
+        this.plan = plan;
+        this.amount = amount;
     }
 
     public Subscription getSubscription() {
@@ -40,13 +49,20 @@ public class BillingProcess {
         this.period = period;
     }
 
-    @Override
-    public String toString() {
-        return "BillingProcess{" +
-                "subscription=" + subscription +
-                ", person=" + person +
-                ", period=" + period +
-                '}';
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 
 }

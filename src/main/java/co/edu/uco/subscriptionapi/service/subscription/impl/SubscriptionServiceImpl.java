@@ -2,6 +2,7 @@ package co.edu.uco.subscriptionapi.service.subscription.impl;
 
 import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
 import co.edu.uco.subscriptionapi.domain.subscription.SubscriptionDetails;
+import co.edu.uco.subscriptionapi.domain.subscription.SubscriptionRequest;
 import co.edu.uco.subscriptionapi.repository.SubscriptionRepository;
 import co.edu.uco.subscriptionapi.repository.entity.SubscriptionEntity;
 import co.edu.uco.subscriptionapi.service.billing.BillingProcessService;
@@ -37,8 +38,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public Subscription saveSubscription(Subscription subscription) {
-        subscription = billingProcessService.execute(subscription);
+    public Subscription saveSubscription(SubscriptionRequest subscriptionRequest) {
+        Subscription subscription = billingProcessService.execute(subscriptionRequest);
         SubscriptionEntity subscriptionEntity = mapper.toEntity(subscription);
         subscriptionRepository.save(subscriptionEntity);
         return subscription;
