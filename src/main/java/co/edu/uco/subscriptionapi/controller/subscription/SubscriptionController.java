@@ -3,6 +3,7 @@ package co.edu.uco.subscriptionapi.controller.subscription;
 import co.edu.uco.subscriptionapi.domain.billing.Billing;
 import co.edu.uco.subscriptionapi.domain.subscription.Subscription;
 import co.edu.uco.subscriptionapi.domain.subscription.SubscriptionDetails;
+import co.edu.uco.subscriptionapi.domain.subscription.SubscriptionRequest;
 import co.edu.uco.subscriptionapi.service.subscription.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,8 @@ public class SubscriptionController {
     @CrossOrigin(origins = "http://localhost:4200")
 
     @PostMapping("/subscription")
-    public Subscription saveSubscription(@RequestBody Subscription subscription) {
-        return subscriptionService.saveSubscription(subscription);
+    public Subscription saveSubscription(@RequestBody SubscriptionRequest subscriptionRequest) {
+        return subscriptionService.saveSubscription(subscriptionRequest);
     }
 
     @PutMapping("/subscription")
@@ -48,6 +49,8 @@ public class SubscriptionController {
     }
 
     @PatchMapping("/subscription")
-    public Subscription patchSubscription(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return subscriptionService.patchSubscription(id, patchFields); }
+    public Subscription patchSubscription(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) {
+        return subscriptionService.patchSubscription(id, patchFields);
+    }
 
 }

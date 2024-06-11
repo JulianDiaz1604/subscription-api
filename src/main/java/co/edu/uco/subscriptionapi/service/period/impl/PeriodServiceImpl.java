@@ -8,6 +8,7 @@ import co.edu.uco.subscriptionapi.service.period.PeriodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,8 +32,8 @@ public class PeriodServiceImpl implements PeriodService {
     }
 
     @Override
-    public List<String> getAllPeriodNames() {
-        return periodRepository.getAllPeriodNames();
+    public List<Period> getAllPeriods() {
+        return periodRepository.getAllPeriods();
     }
 
     @Override

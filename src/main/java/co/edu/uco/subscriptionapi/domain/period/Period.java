@@ -9,6 +9,17 @@ public class Period {
     private double discount;
     private int months;
 
+    public Period() {
+
+    }
+
+    public Period(UUID id, String name, double discount, int months) {
+        this.id = id;
+        this.name = name;
+        this.discount = discount;
+        this.months = months;
+    }
+
     public UUID getId() {
         return id;
     }

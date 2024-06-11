@@ -11,7 +11,7 @@ public interface PeriodService {
 
     Period getPeriodByName(String periodName);
 
-    List<String> getAllPeriodNames();
+    List<Period> getAllPeriods();
 
     Period savePeriod(Period period);
 
