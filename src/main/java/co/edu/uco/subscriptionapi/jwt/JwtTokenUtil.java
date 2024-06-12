@@ -16,12 +16,13 @@ import java.util.function.Function;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    private static final long serialVersionUID = -2550185165626007488L;
-
-    public static final long JWT_TOKEN_VALIDITY = 5*60*60;
+    @Value("${jwt.token.validity}")
+    private long JWT_TOKEN_VALIDITY;
 
     @Value("${jwt.secret}")
     private String secret;
+
+    private static final long serialVersionUID = -2550185165626007488L;
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -50,7 +51,6 @@ public class JwtTokenUtil implements Serializable {
     }
 
     private Boolean ignoreTokenExpiration(String token) {
-        // here you specify tokens, for that the expiration is ignored
         return false;
     }
 
@@ -62,7 +62,7 @@ public class JwtTokenUtil implements Serializable {
     private String doGenerateToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY*1000)).signWith(SignatureAlgorithm.HS512, secret).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY)).signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public Boolean canTokenBeRefreshed(String token) {

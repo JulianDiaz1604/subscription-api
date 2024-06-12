@@ -36,6 +36,7 @@ public class MessageSenderBroker {
             rabbitTemplate.convertAndSend(rabbitMQProperties.getExchange().getRequest(), rabbitMQProperties.getRoutingKey().getBillingProcessing(), jsonMessage);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-        }    }
+        }
+    }
 
 }

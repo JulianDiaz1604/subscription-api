@@ -3,6 +3,8 @@ package co.edu.uco.subscriptionapi.controller.plan;
 import co.edu.uco.subscriptionapi.domain.plan.Plan;
 import co.edu.uco.subscriptionapi.service.plan.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,37 +19,93 @@ public class PlanController {
     private PlanService planService;
 
     @GetMapping("/plan")
-    public Plan getPlanById(@RequestParam UUID id) {
-        return planService.getPlanById(id);
+    public ResponseEntity<?> getPlanById(@RequestParam UUID id) {
+        try {
+            Plan plan = planService.getPlanById(id);
+            if (plan != null) {
+                return ResponseEntity.ok(plan);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Plan not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving plan: " + e.getMessage());
+        }
     }
 
     @GetMapping("/plan/name/{name}")
-    public Plan getPlanByName(@PathVariable("name") String name) {
-        return planService.getPlanByName(name);
+    public ResponseEntity<?> getPlanByName(@PathVariable("name") String name) {
+        try {
+            Plan plan = planService.getPlanByName(name);
+            if (plan != null) {
+                return ResponseEntity.ok(plan);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Plan not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving plan: " + e.getMessage());
+        }
     }
 
     @GetMapping("/plan/list/{period}")
-    public List<Plan> getPlanList(@PathVariable("period") String period) {
-        return planService.getAllPlan(period);
+    public ResponseEntity<?> getPlanList(@PathVariable("period") String period) {
+        try {
+            List<Plan> plans = planService.getAllPlan(period);
+            if (plans != null && !plans.isEmpty()) {
+                return ResponseEntity.ok(plans);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No plans found for the specified period");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving plans: " + e.getMessage());
+        }
     }
 
     @PostMapping("/plan")
-    public Plan savePlan(@RequestBody Plan plan) {
-        return planService.savePlan(plan);
+    public ResponseEntity<?> savePlan(@RequestBody Plan plan) {
+        try {
+            Plan savedPlan = planService.savePlan(plan);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedPlan);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving plan: " + e.getMessage());
+        }
     }
 
     @PutMapping("/plan")
-    public Plan updatePlan(@RequestBody Plan plan) {
-            return planService.updatePlan(plan);
+    public ResponseEntity<?> updatePlan(@RequestBody Plan plan) {
+        try {
+            Plan updatedPlan = planService.updatePlan(plan);
+            if (updatedPlan != null) {
+                return ResponseEntity.ok(updatedPlan);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Plan not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating plan: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/plan")
-    public void deletePlan(@RequestParam UUID id) {
-        planService.deletePlan(id);
+    public ResponseEntity<?> deletePlan(@RequestParam UUID id) {
+        try {
+            planService.deletePlan(id);
+            return ResponseEntity.ok().body("Plan deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting plan: " + e.getMessage());
+        }
     }
 
     @PatchMapping("/plan")
-    public Plan patchPlan(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return planService.patchPlan(id, patchFields); }
+    public ResponseEntity<?> patchPlan(@RequestBody Map<String, Object> patchFields, @RequestParam UUID id) {
+        try {
+            Plan patchedPlan = planService.patchPlan(id, patchFields);
+            if (patchedPlan != null) {
+                return ResponseEntity.ok(patchedPlan);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Plan not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error patching plan: " + e.getMessage());
+        }
+    }
 
 }
-

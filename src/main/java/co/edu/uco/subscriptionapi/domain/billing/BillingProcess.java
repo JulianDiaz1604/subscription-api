@@ -13,10 +13,6 @@ public class BillingProcess {
     private Plan plan;
     private Double amount;
 
-    public BillingProcess() {
-
-    }
-
     public BillingProcess(Subscription subscription, Person person, Period period, Plan plan, Double amount) {
         this.subscription = subscription;
         this.person = person;

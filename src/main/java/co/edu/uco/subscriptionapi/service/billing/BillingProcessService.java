@@ -5,6 +5,6 @@ import co.edu.uco.subscriptionapi.domain.subscription.SubscriptionRequest;
 
 public interface BillingProcessService {
 
-    public Subscription execute(SubscriptionRequest subscription);
+    Subscription execute(SubscriptionRequest subscription);
 
 }

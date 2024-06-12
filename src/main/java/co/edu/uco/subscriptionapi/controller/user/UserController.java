@@ -1,9 +1,10 @@
 package co.edu.uco.subscriptionapi.controller.user;
 
-import co.edu.uco.subscriptionapi.domain.plan.Plan;
 import co.edu.uco.subscriptionapi.domain.user.MyUser;
 import co.edu.uco.subscriptionapi.service.user.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -17,29 +18,79 @@ public class UserController {
     private MyUserService userService;
 
     @GetMapping("/user")
-    public MyUser getUserById(@RequestParam UUID id) {
-        return userService.getUserById(id);
+    public ResponseEntity<?> getUserById(@RequestParam UUID id) {
+        try {
+            MyUser user = userService.getUserById(id);
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving user: " + e.getMessage());
+        }
     }
 
     @GetMapping("/user/username/{username}")
-    public MyUser getUserByUsername(@PathVariable String username) {
-        return userService.getUserByUsername(username);
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        try {
+            MyUser user = userService.getUserByUsername(username);
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving user: " + e.getMessage());
+        }
     }
 
     @PostMapping("/user")
-    public MyUser saveUser(@RequestBody MyUser user) {
-        return userService.saveUser(user);
+    public ResponseEntity<?> saveUser(@RequestBody MyUser user) {
+        try {
+            MyUser savedUser = userService.saveUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving user: " + e.getMessage());
+        }
     }
 
     @PutMapping("/user")
-    public MyUser updateUser(@RequestBody MyUser user) {
-        return userService.updateUser(user);
+    public ResponseEntity<?> updateUser(@RequestBody MyUser user) {
+        try {
+            MyUser updatedUser = userService.updateUser(user);
+            if (updatedUser != null) {
+                return ResponseEntity.ok(updatedUser);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/user")
-    public void deleteUser(@RequestParam UUID id) {
-        userService.deleteUser(id);
+    public ResponseEntity<?> deleteUser(@RequestParam UUID id) {
+        try {
+            userService.deleteUser(id);
+            return ResponseEntity.ok().body("User deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user: " + e.getMessage());
+        }
     }
+
     @PatchMapping("/user")
-    public MyUser patchMyUser(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return userService.patchUser(id, patchFields); }
+    public ResponseEntity<?> patchUser(@RequestBody Map<String, Object> patchFields, @RequestParam UUID id) {
+        try {
+            MyUser patchedUser = userService.patchUser(id, patchFields);
+            if (patchedUser != null) {
+                return ResponseEntity.ok(patchedUser);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error patching user: " + e.getMessage());
+        }
+    }
+
 }

@@ -53,7 +53,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public List<Plan> getAllPlan(String period) {
         Double discount = periodService.getPeriodByName(period).getDiscount();
-        List<PlanEntity> planEntities = planRepository.findAll();
+        List<PlanEntity> planEntities = planRepository.getAllPlans();
         List<Plan> planList = new ArrayList<>();
         for (PlanEntity planEntity : planEntities) {
             planList.add(mapper.toDTO(planEntity));
