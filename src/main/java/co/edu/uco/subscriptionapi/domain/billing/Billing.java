@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Billing {
+
     private UUID id;
     private double amount;
     private LocalDateTime emissionDate;
@@ -61,4 +62,5 @@ public class Billing {
                 ", subscriptionId=" + subscriptionId +
                 '}';
     }
+
 }

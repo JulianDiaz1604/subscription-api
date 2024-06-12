@@ -1,6 +1,5 @@
 package co.edu.uco.subscriptionapi.controller.user;
 
-import co.edu.uco.subscriptionapi.domain.plan.Plan;
 import co.edu.uco.subscriptionapi.domain.user.MyUser;
 import co.edu.uco.subscriptionapi.service.user.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,10 @@ public class UserController {
     public void deleteUser(@RequestParam UUID id) {
         userService.deleteUser(id);
     }
+
     @PatchMapping("/user")
-    public MyUser patchMyUser(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return userService.patchUser(id, patchFields); }
+    public MyUser patchMyUser(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) {
+        return userService.patchUser(id, patchFields);
+    }
+
 }

@@ -62,4 +62,5 @@ public class MyUserServiceImpl implements MyUserService {
     public void deleteUser(UUID id) {
         userRepository.deleteById(id);
     }
+
 }

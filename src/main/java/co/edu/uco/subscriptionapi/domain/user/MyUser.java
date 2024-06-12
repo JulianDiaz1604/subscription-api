@@ -3,6 +3,7 @@ package co.edu.uco.subscriptionapi.domain.user;
 import java.util.UUID;
 
 public class MyUser {
+
     private UUID id;
     private String username;
     private String password;
@@ -59,4 +60,5 @@ public class MyUser {
                 ", isAdmin=" + isAdmin +
                 '}';
     }
+
 }

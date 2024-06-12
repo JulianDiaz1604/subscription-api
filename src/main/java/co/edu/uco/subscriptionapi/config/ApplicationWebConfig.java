@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SuppressWarnings("deprecation")
 @Configuration
@@ -21,8 +20,8 @@ public class ApplicationWebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/v1/**")
-                        .allowedOrigins("http://localhost:4200") // Especifica el dominio permitido
-                        .allowedMethods("DELETE", "PUT", "POST", "GET") // Métodos HTTP permitidos
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("DELETE", "PUT", "POST", "GET")
                         .allowCredentials(true);
             }
         };

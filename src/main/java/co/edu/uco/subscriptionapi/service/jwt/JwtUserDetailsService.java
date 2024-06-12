@@ -26,25 +26,22 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        MyUserEntity user = myUserRepository.getUserByUsername(username).block();
+
         MyUserEntity userEntity = myUserRepository.getUserByUsername(username);
         MyUser user = myUserMapper.toDTO(userEntity);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
+
     }
 
-//    public Mono<RedUser> save(RedUser redUser) {
-//        redUser.setPassword(bcryptEncoder.encode(redUser.getPassword()));
-//        return myUserRepository.save(redUser);
-//    }
-
     public MyUser save(MyUser myUser) {
+
         myUser.setPassword(bcryptEncoder.encode(myUser.getPassword()));
         MyUserEntity userEntity = myUserMapper.toEntity(myUser);
         return myUserMapper.toDTO(myUserRepository.save(userEntity));
+
     }
 
 }

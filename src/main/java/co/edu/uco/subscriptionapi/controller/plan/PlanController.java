@@ -38,7 +38,7 @@ public class PlanController {
 
     @PutMapping("/plan")
     public Plan updatePlan(@RequestBody Plan plan) {
-            return planService.updatePlan(plan);
+        return planService.updatePlan(plan);
     }
 
     @DeleteMapping("/plan")
@@ -47,7 +47,9 @@ public class PlanController {
     }
 
     @PatchMapping("/plan")
-    public Plan patchPlan(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) { return planService.patchPlan(id, patchFields); }
+    public Plan patchPlan(@RequestBody Map<?, Object> patchFields, @RequestParam UUID id) {
+        return planService.patchPlan(id, patchFields);
+    }
 
 }
 

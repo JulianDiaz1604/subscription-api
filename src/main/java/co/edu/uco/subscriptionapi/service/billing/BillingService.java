@@ -1,7 +1,6 @@
 package co.edu.uco.subscriptionapi.service.billing;
 
 import co.edu.uco.subscriptionapi.domain.billing.Billing;
-import co.edu.uco.subscriptionapi.domain.user.MyUser;
 
 import java.util.Map;
 import java.util.UUID;
@@ -19,5 +18,6 @@ public interface BillingService {
     Billing updateBilling(Billing  billing);
 
     Billing patchBilling(UUID id, Map<?, Object> patchFields);
+
 }
 

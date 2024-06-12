@@ -1,17 +1,14 @@
 package co.edu.uco.subscriptionapi.service.billing.impl;
 
 import co.edu.uco.subscriptionapi.domain.billing.Billing;
-import co.edu.uco.subscriptionapi.domain.plan.Plan;
 import co.edu.uco.subscriptionapi.repository.BillingRepository;
 import co.edu.uco.subscriptionapi.repository.entity.BillingEntity;
-import co.edu.uco.subscriptionapi.repository.entity.PlanEntity;
 import co.edu.uco.subscriptionapi.service.billing.BillingService;
 import co.edu.uco.subscriptionapi.service.mappers.BillingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.UUID;
 @Service
@@ -68,7 +65,5 @@ public class BillingServiceImpl implements BillingService {
         BillingEntity billingEntity = mapper.toEntity(billing);
         return mapper.toDTO(billingRepository.save(billingEntity));
     }
-
-
 
 }
