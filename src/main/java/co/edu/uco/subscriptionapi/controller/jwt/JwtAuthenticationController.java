@@ -41,8 +41,8 @@ public class JwtAuthenticationController {
     @Autowired
     private PersonService personService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
+    @PostMapping(value = "/authenticate", produces = "application/json")
+    public ResponseEntity<AuthenticateResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
 
         try {
 
@@ -58,8 +58,11 @@ public class JwtAuthenticationController {
             return ResponseEntity.ok(new AuthenticateResponse(userId, isAdmin, token));
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(new AuthenticateResponse(null, false, e.getMessage()), HttpStatus.UNAUTHORIZED);
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
         }
+
     }
 
     @PostMapping("/register")
