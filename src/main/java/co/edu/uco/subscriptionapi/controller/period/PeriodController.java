@@ -27,7 +27,7 @@ public class PeriodController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Period not found");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving period: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving period");
         }
     }
 
@@ -41,7 +41,7 @@ public class PeriodController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Period not found");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving period: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving period");
         }
     }
 
@@ -51,7 +51,7 @@ public class PeriodController {
             List<Period> periods = periodService.getAllPeriods();
             return ResponseEntity.ok(periods);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving periods: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving periods");
         }
     }
 
@@ -61,7 +61,7 @@ public class PeriodController {
             Period savedPeriod = periodService.savePeriod(period);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedPeriod);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving period: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving period");
         }
     }
 
@@ -75,7 +75,7 @@ public class PeriodController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Period not found");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating period: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating period");
         }
     }
 
@@ -85,7 +85,7 @@ public class PeriodController {
             periodService.deletePeriod(id);
             return ResponseEntity.ok().body("Period deleted successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting period: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("This period cannot be deleted because there are active subscriptions that depend on it.");
         }
     }
 
