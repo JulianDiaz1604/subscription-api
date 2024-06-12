@@ -15,7 +15,7 @@ public interface PlanRepository extends JpaRepository<PlanEntity, UUID> {
     @Query("SELECT c FROM PlanEntity c WHERE c.name = :name")
     PlanEntity getPlanByName(@Param("name") String name);
 
-    @Query("SELECT c FROM PlanEntity c")
+    @Query("SELECT c FROM PlanEntity c ORDER BY c.price ASC")
     List<PlanEntity> getAllPlans();
 
 }

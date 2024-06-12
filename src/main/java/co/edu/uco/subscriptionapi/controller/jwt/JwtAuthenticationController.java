@@ -10,6 +10,7 @@ import co.edu.uco.subscriptionapi.service.jwt.JwtUserDetailsService;
 import co.edu.uco.subscriptionapi.service.person.PersonService;
 import co.edu.uco.subscriptionapi.service.user.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -41,42 +42,47 @@ public class JwtAuthenticationController {
     private PersonService personService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
-            throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
 
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        try {
 
-        final UserDetails
-                userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-        final MyUser user = myUserService.getUserByUsername(authenticationRequest.getUsername());
-        final UUID userId = user.getId();
-        final boolean isAdmin = user.isAdmin();
-        final String token = jwtTokenUtil.generateToken(userDetails);
+            authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        return ResponseEntity.ok(new AuthenticateResponse(userId, isAdmin, token));
+            final UserDetails userDetails = userDetailsService
+                    .loadUserByUsername(authenticationRequest.getUsername());
+            final MyUser user = myUserService.getUserByUsername(authenticationRequest.getUsername());
+            final UUID userId = user.getId();
+            final boolean isAdmin = user.isAdmin();
+            final String token = jwtTokenUtil.generateToken(userDetails);
 
+            return ResponseEntity.ok(new AuthenticateResponse(userId, isAdmin, token));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
+        }
     }
 
     @PostMapping("/register")
-    public MyUser saveUser(@RequestBody UserRegistrationRequest userRegistrationRequest) {
+    public ResponseEntity<MyUser> saveUser(@RequestBody UserRegistrationRequest userRegistrationRequest) {
 
-        MyUser user = userRegistrationRequest.getUser();
-        Person person = userRegistrationRequest.getPerson();
         MyUser savedUser = new MyUser();
 
         try {
+            Person person = userRegistrationRequest.getPerson();
             person.setId(UUID.randomUUID());
             personService.savePerson(person);
+
+            MyUser user = userRegistrationRequest.getUser();
             user.setId(UUID.randomUUID());
             user.setPersonId(person.getId());
+
             savedUser = userDetailsService.save(user);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+
         } catch (Exception e) {
-            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-
-        return savedUser;
-
     }
 
     private void authenticate(String username, String password) throws Exception {
