@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public interface SubscriptionRepository extends JpaRepository<SubscriptionEntity, UUID> {
 
-    @Query("SELECT c FROM SubscriptionEntity c WHERE c.userId = :userId")
+    @Query("SELECT c FROM SubscriptionEntity c WHERE c.userId = :userId AND c.status = 'Active'")
     ArrayList<SubscriptionEntity> getSubscriptionListByUserId(@Param("userId") UUID userId);
 
     @Query("SELECT new co.edu.uco.subscriptionapi.domain.subscription.SubscriptionDetails(" +
