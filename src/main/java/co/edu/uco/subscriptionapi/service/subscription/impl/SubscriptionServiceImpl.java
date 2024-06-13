@@ -40,7 +40,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public Subscription saveSubscription(SubscriptionRequest subscriptionRequest) {
         Subscription subscription = billingProcessService.execute(subscriptionRequest);
+        subscription.setStatus("Active");
         SubscriptionEntity subscriptionEntity = mapper.toEntity(subscription);
+        ArrayList<Subscription> subscriptions = getSubscriptionListByUserId(subscriptionRequest.getUserId());
+        subscriptions.forEach(sub -> {
+            sub.setStatus("Inactive");
+            subscriptionRepository.save(mapper.toEntity(sub));
+        });
         subscriptionRepository.save(subscriptionEntity);
         return subscription;
     }
